@@ -7,21 +7,22 @@ import (
 	"log"
 	"os"
 	"strings"
+
+	"github.com/RafaZeero/go-git-clone/commands"
 )
 
 func main() {
-	// hash()
 	var cmd string
 
 	if len(os.Args) == 1 {
 		cmd = "help"
 	} else {
-		cmd = strings.ToLower(os.Args[1])
+		cmd = cleanCommand(os.Args[1])
 	}
 
 	switch cmd {
 	case "init":
-		fmt.Println("You choose init")
+		commands.Init()
 	case "add":
 		fmt.Println("You choose add")
 
@@ -53,6 +54,11 @@ func main() {
 		instructions()
 	}
 
+}
+
+// Clean command string
+func cleanCommand(cmd string) string {
+	return strings.ToLower(strings.Trim(cmd, " "))
 }
 
 func instructions() {
